@@ -1,8 +1,6 @@
 package com.example.demo.Controllers;
 
-import com.example.demo.Models.QualityImage;
-import com.example.demo.Repository.RestbaiRepository;
-import org.springframework.http.ResponseEntity;
+import com.example.demo.Services.QualityImageService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,10 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ControllerQualityImages {
 
-    RestbaiRepository restbaiRepository = new RestbaiRepository();
+    private final QualityImageService qualityImageService;
+
+    public ControllerQualityImages(QualityImageService qualityImageService) {
+        this.qualityImageService = qualityImageService;
+    }
+
     @GetMapping("/cositas")
     public double getImageQuality(@RequestParam(name = "imageUrl") String imageUrl){
-        QualityImage qualityImage = restbaiRepository.basicGet(imageUrl);
-        return qualityImage.getResponse().getSolutions().getRe_condition_r1r6_international().getScore();
+        return qualityImageService.getQualityIamge(imageUrl);
     }
 }
