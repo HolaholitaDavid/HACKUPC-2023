@@ -17,6 +17,6 @@ public class ConstURLS {
                modelsString += model+",";
           }
           modelsString = modelsString.substring(0, modelsString.length()-1);
-          return base_url+"model_id="+modelsString+"&image_url"+imageURL;
+          return base_url+"&model_id="+modelsString+"&image_url="+imageURL;
      }
 }
