@@ -11,4 +11,12 @@ public class Solutions {
     public void setRe_condition_r1r6_international(re_condition_r1r6_international re_condition_r1r6_international) {
         this.re_condition_r1r6_international = re_condition_r1r6_international;
     }
+
+    public Auto_enhancement getAuto_enhancement() {
+        return auto_enhancement;
+    }
+
+    public void setAuto_enhancement(Auto_enhancement auto_enhancement) {
+        this.auto_enhancement = auto_enhancement;
+    }
 }

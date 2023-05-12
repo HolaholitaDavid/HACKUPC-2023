@@ -14,4 +14,10 @@ public class QualityImageService {
         Double scoreOverTen = (6-score)/5*10;
         return scoreOverTen;
     }
+
+    public String enhanceImage(String imageUrl) {
+        QualityImage qualityImage = restbaiRepository.enhanceImage(imageUrl);
+        String enhancedImageUrl = qualityImage.getResponse().getSolutions().getAuto_enhancement().getImage_url();
+        return enhancedImageUrl;
+    }
 }

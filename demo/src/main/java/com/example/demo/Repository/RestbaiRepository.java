@@ -8,8 +8,6 @@ import static com.example.demo.Utils.ConstURLS.base_url;
 
 public class RestbaiRepository {
     private final RestTemplate restTemplate  = new RestTemplate();
-    private final String apiKey = "de16fead467ec83f535085d69472c4e77e3ba8edf6f7b43f994c70cd3ceb9571";
-    private final String baseUrl = "https://api-us.restb.ai/vision/v2/multipredict";
 
     public QualityImage getQualityImageFromUrl(String imageUrl){
         String finalUrl = base_url.replace("{REMAINING}",
@@ -18,4 +16,9 @@ public class RestbaiRepository {
         return response.getBody();
     }
 
+    public QualityImage enhanceImage(String imageUrl) {
+        String finalUrl = base_url.replace("{REMAINING}", "?model_id=auto_enhancement&image_url="+imageUrl);
+        ResponseEntity<QualityImage> response = restTemplate.getForEntity(finalUrl, QualityImage.class);
+        return response.getBody();
+    }
 }

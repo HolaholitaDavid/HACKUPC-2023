@@ -14,8 +14,12 @@ public class ControllerQualityImages {
         this.qualityImageService = qualityImageService;
     }
 
-    @GetMapping("/cositas")
+    @GetMapping("/quality")
     public double getImageQuality(@RequestParam(name = "imageUrl") String imageUrl){
         return qualityImageService.getQualityIamge(imageUrl);
+    }
+    @GetMapping("/quality/enhance")
+    public String getImangeEnhanced(@RequestParam(name = "imageUrl") String imageUrl){
+        return qualityImageService.enhanceImage(imageUrl);
     }
 }
