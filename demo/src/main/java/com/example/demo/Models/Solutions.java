@@ -3,6 +3,7 @@ package com.example.demo.Models;
 public class Solutions {
     private re_condition_r1r6_international re_condition_r1r6_international;
     private Auto_enhancement auto_enhancement;
+    private Re_features_v4 re_features_v4;
 
     public re_condition_r1r6_international getRe_condition_r1r6_international() {
         return re_condition_r1r6_international;
@@ -18,5 +19,13 @@ public class Solutions {
 
     public void setAuto_enhancement(Auto_enhancement auto_enhancement) {
         this.auto_enhancement = auto_enhancement;
+    }
+
+    public Re_features_v4 getRe_features_v4() {
+        return re_features_v4;
+    }
+
+    public void setRe_features_v4(Re_features_v4 re_features_v4) {
+        this.re_features_v4 = re_features_v4;
     }
 }

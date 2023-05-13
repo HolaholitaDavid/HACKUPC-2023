@@ -1,5 +1,6 @@
 package com.example.demo.Controllers;
 
+import com.example.demo.DTOs.DTOCompleteImageInfo;
 import com.example.demo.DTOs.DTOEnhancedImage;
 import com.example.demo.Services.QualityImageService;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,7 +28,7 @@ public class ControllerQualityImages {
     }
 
     @GetMapping("/quality/enhance/information")
-    public DTOEnhancedImage getInfoEnhancedImage(@RequestParam(name = "imageUrl") String imageUrl){
+    public DTOCompleteImageInfo getInfoEnhancedImage(@RequestParam(name = "imageUrl") String imageUrl){
         return qualityImageService.enhanceImageInformation(imageUrl);
     }
 }
