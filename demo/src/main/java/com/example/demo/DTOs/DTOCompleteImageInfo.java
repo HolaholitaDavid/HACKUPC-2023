@@ -12,7 +12,10 @@ public class DTOCompleteImageInfo {
     private Top_Prediction room_type_prediction;
     private Caption caption;
 
-    public DTOCompleteImageInfo(DTOEnhancedImage enhancedImageInfo, List<Detections> detections, Top_Prediction room_type_prediction, Caption caption) {
+    private List<String> similiarImages;
+
+    public DTOCompleteImageInfo(DTOEnhancedImage enhancedImageInfo, List<Detections> detections, Top_Prediction room_type_prediction, Caption caption, List<String> similiarImages) {
+        this.similiarImages = similiarImages;
         this.detections = detections;
         enhancingDetails = enhancedImageInfo;
         this.room_type_prediction = room_type_prediction;
@@ -49,5 +52,13 @@ public class DTOCompleteImageInfo {
 
     public void setCaption(Caption caption) {
         this.caption = caption;
+    }
+
+    public List<String> getSimiliarImages() {
+        return similiarImages;
+    }
+
+    public void setSimiliarImages(List<String> similiarImages) {
+        this.similiarImages = similiarImages;
     }
 }
