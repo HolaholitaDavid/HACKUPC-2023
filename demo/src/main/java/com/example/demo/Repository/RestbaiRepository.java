@@ -27,4 +27,10 @@ public class RestbaiRepository {
         ResponseEntity<QualityImage> response = restTemplate.getForEntity(finalUrl, QualityImage.class);
         return response.getBody();
     }
+
+    public QualityImage getModelInformation64(String imageBase64, List<String> models) {
+        String finalUrl = formatMultiURL64(models, imageBase64);
+        ResponseEntity<QualityImage> response = restTemplate.getForEntity(finalUrl, QualityImage.class);
+        return response.getBody();
+    }
 }

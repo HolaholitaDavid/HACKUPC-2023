@@ -41,4 +41,15 @@ public class QualityImageService {
         List<Detections> detections = qualityImage.getResponse().getSolutions().getRe_features_v4().getDetections();
         return new DTOCompleteImageInfo(enhancedImageInfo, detections);
     }
+
+    public DTOCompleteImageInfo enhanceImageInformation64(String imageBase64) {
+        List<String> models = new ArrayList<String>(Arrays.asList(ENHANCE, SCORE, FEATURES));
+        QualityImage qualityImage = restbaiRepository.getModelInformation64(imageBase64, models);
+        String enhancedImage = qualityImage.getResponse().getSolutions().getAuto_enhancement().getImage_url();
+        double enhancedImageScore = getQualityIamge(enhancedImage);
+        double baseImageScore = qualityImage.getResponse().getSolutions().getRe_condition_r1r6_international().getScore();
+        DTOEnhancedImage enhancedImageInfo = new DTOEnhancedImage(imageBase64, enhancedImage, baseImageScore, enhancedImageScore);
+        List<Detections> detections = qualityImage.getResponse().getSolutions().getRe_features_v4().getDetections();
+        return new DTOCompleteImageInfo(enhancedImageInfo, detections);
+    }
 }

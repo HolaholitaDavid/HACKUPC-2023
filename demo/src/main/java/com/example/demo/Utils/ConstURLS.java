@@ -20,4 +20,12 @@ public class ConstURLS {
           modelsString = modelsString.substring(0, modelsString.length()-1);
           return base_url+"&model_id="+modelsString+"&image_url="+imageURL;
      }
+     public static final String formatMultiURL64(List<String> models, String imageURL) {
+          String modelsString = "";
+          for (String model : models) {
+               modelsString += model+",";
+          }
+          modelsString = modelsString.substring(0, modelsString.length()-1);
+          return base_url+"&model_id="+modelsString+"&image_base64="+imageURL;
+     }
 }

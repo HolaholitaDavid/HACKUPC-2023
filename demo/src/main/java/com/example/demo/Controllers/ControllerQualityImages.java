@@ -31,4 +31,9 @@ public class ControllerQualityImages {
     public DTOCompleteImageInfo getInfoEnhancedImage(@RequestParam(name = "imageUrl") String imageUrl){
         return qualityImageService.enhanceImageInformation(imageUrl);
     }
+
+    @GetMapping("/quality/enhance/informationBase64")
+    public DTOCompleteImageInfo getInfoEnhancedImage64(@RequestParam(name = "imageBase64") String imageBase64){
+        return qualityImageService.enhanceImageInformation64(imageBase64);
+    }
 }
