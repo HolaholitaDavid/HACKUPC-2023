@@ -45,7 +45,8 @@ public class QualityImageService {
         String enhancedImage = solutions.getAuto_enhancement().getImage_url();
         double enhancedImageScore = getQualityIamge(enhancedImage);
         double baseImageScore = solutions.getRe_condition_r1r6_international().getScore();
-        DTOEnhancedImage enhancedImageInfo = new DTOEnhancedImage(image, enhancedImage, baseImageScore, enhancedImageScore);
+        double scoreOverTen = (6-baseImageScore)/5*10;
+        DTOEnhancedImage enhancedImageInfo = new DTOEnhancedImage(image, enhancedImage, scoreOverTen, enhancedImageScore);
         List<Detections> detections = solutions.getRe_features_v4().getDetections();
         Top_Prediction room_type_prediction = qualityImage.getResponse().getSolutions().getRe_roomtype_international().getTop_prediction();
         Caption caption = solutions.getCaption();
