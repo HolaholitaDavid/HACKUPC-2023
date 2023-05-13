@@ -4,6 +4,8 @@ public class Solutions {
     private re_condition_r1r6_international re_condition_r1r6_international;
     private Auto_enhancement auto_enhancement;
     private Re_features_v4 re_features_v4;
+    private Re_roomtype_international re_roomtype_international;
+    private Caption caption;
 
     public re_condition_r1r6_international getRe_condition_r1r6_international() {
         return re_condition_r1r6_international;
@@ -27,5 +29,21 @@ public class Solutions {
 
     public void setRe_features_v4(Re_features_v4 re_features_v4) {
         this.re_features_v4 = re_features_v4;
+    }
+
+    public Re_roomtype_international getRe_roomtype_international() {
+        return re_roomtype_international;
+    }
+
+    public void setRe_roomtype_international(Re_roomtype_international re_roomtype_international) {
+        this.re_roomtype_international = re_roomtype_international;
+    }
+
+    public Caption getCaption() {
+        return caption;
+    }
+
+    public void setCaption(Caption caption) {
+        this.caption = caption;
     }
 }

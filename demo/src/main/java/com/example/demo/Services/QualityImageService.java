@@ -2,9 +2,7 @@ package com.example.demo.Services;
 
 import com.example.demo.DTOs.DTOCompleteImageInfo;
 import com.example.demo.DTOs.DTOEnhancedImage;
-import com.example.demo.Models.Detections;
-import com.example.demo.Models.QualityImage;
-import com.example.demo.Models.Re_features_v4;
+import com.example.demo.Models.*;
 import com.example.demo.Repository.RestbaiRepository;
 import org.springframework.stereotype.Service;
 
@@ -32,24 +30,25 @@ public class QualityImageService {
     }
 
     public DTOCompleteImageInfo enhanceImageInformation(String imageUrl) {
-        List<String> models = new ArrayList<String>(Arrays.asList(ENHANCE, SCORE, FEATURES));
+        List<String> models = new ArrayList<String>(Arrays.asList(ENHANCE, SCORE, FEATURES, ROOMTYPE, CAPTION));
         QualityImage qualityImage = restbaiRepository.getModelInformation(imageUrl, models);
-        String enhancedImage = qualityImage.getResponse().getSolutions().getAuto_enhancement().getImage_url();
-        double enhancedImageScore = getQualityIamge(enhancedImage);
-        double baseImageScore = qualityImage.getResponse().getSolutions().getRe_condition_r1r6_international().getScore();
-        DTOEnhancedImage enhancedImageInfo = new DTOEnhancedImage(imageUrl, enhancedImage, baseImageScore, enhancedImageScore);
-        List<Detections> detections = qualityImage.getResponse().getSolutions().getRe_features_v4().getDetections();
-        return new DTOCompleteImageInfo(enhancedImageInfo, detections);
+        return createDTO(qualityImage, imageUrl);
     }
 
     public DTOCompleteImageInfo enhanceImageInformation64(String imageBase64) {
-        List<String> models = new ArrayList<String>(Arrays.asList(ENHANCE, SCORE, FEATURES));
+        List<String> models = new ArrayList<String>(Arrays.asList(ENHANCE, SCORE, FEATURES, ROOMTYPE, CAPTION));
         QualityImage qualityImage = restbaiRepository.getModelInformation64(imageBase64, models);
-        String enhancedImage = qualityImage.getResponse().getSolutions().getAuto_enhancement().getImage_url();
+        return createDTO(qualityImage, imageBase64);
+    }
+    private DTOCompleteImageInfo createDTO(QualityImage qualityImage, String image) {
+        Solutions solutions = qualityImage.getResponse().getSolutions();
+        String enhancedImage = solutions.getAuto_enhancement().getImage_url();
         double enhancedImageScore = getQualityIamge(enhancedImage);
-        double baseImageScore = qualityImage.getResponse().getSolutions().getRe_condition_r1r6_international().getScore();
-        DTOEnhancedImage enhancedImageInfo = new DTOEnhancedImage(imageBase64, enhancedImage, baseImageScore, enhancedImageScore);
-        List<Detections> detections = qualityImage.getResponse().getSolutions().getRe_features_v4().getDetections();
-        return new DTOCompleteImageInfo(enhancedImageInfo, detections);
+        double baseImageScore = solutions.getRe_condition_r1r6_international().getScore();
+        DTOEnhancedImage enhancedImageInfo = new DTOEnhancedImage(image, enhancedImage, baseImageScore, enhancedImageScore);
+        List<Detections> detections = solutions.getRe_features_v4().getDetections();
+        Top_Prediction room_type_prediction = qualityImage.getResponse().getSolutions().getRe_roomtype_international().getTop_prediction();
+        Caption caption = solutions.getCaption();
+        return (new DTOCompleteImageInfo(enhancedImageInfo, detections, room_type_prediction, caption));
     }
 }
